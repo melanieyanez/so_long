@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 00:19:58 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/11 17:40:09 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/15 18:23:10 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 # include <stdio.h>
 # include <stdlib.h>
+# include <fcntl.h>
 # include "../mlx/mlx.h"
+# include "../libft/includes/libft.h"
 
 # define WIDTH 1280
 # define HEIGHT 720
@@ -33,7 +35,16 @@
 # define YELLOW 0x00FFFACD
 # define PINK 	0x00FF69B4
 
-typedef struct img_data
+/*_____________ Structures _______________________*/
+
+typedef struct s_map
+{
+	char	*path;
+	int		map_x;
+	int		map_y;
+}t_map;
+
+typedef struct s_img
 {
 	void	*img;
 	char	*addr;
@@ -42,7 +53,7 @@ typedef struct img_data
 	int		endian;
 }t_img;
 
-typedef struct player
+typedef struct s_player
 {
 	int	pos_x;
 	int	pos_y;
@@ -56,8 +67,8 @@ typedef struct utils
 
 typedef struct s_square
 {
-	int start_x;
-	int start_y;
+	int	start_x;
+	int	start_y;
 	int	size;
 }t_square;
 
@@ -65,9 +76,39 @@ typedef struct s_vars
 {
 	void		*mlx;
 	void		*wdw;
+	int			tile_size_x;
+	int			tile_size_y;
+	t_map		map;
 	t_img		background;
+	t_img		test;
 	t_img		img;
 	t_square	square;
 }t_vars;
+
+/*_____________ Functions _______________________*/
+
+//checker.c
+
+//events.c
+
+int		close_window(t_vars *vars);
+int		mouse_actions(int key, t_vars *vars);
+int		key_actions(int key, t_vars *vars);
+
+//initialization.c
+
+void	initialization(t_vars *vars, char *file_path);
+
+//parsing.c
+
+void	line_interpreter(char *line);
+void	map_parser(t_vars *vars);
+
+//render.c
+
+void	draw_background(t_vars *vars);
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
+void	drawing(t_vars *vars);
+void	drawing_updated(t_vars *vars, char *line);
 
 #endif
