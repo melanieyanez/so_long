@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 00:19:58 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/16 11:10:15 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/16 22:24:18 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,17 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		sheet_x;
+	int		sheet_y;
+	int		sheet_width;
+	int		sheet_height;
 }t_img;
 
 typedef struct s_player
 {
-	int	pos_x;
-	int	pos_y;
+	int		pos_x;
+	int		pos_y;
+	t_img	img;
 }t_player;
 
 typedef struct utils
@@ -80,7 +85,7 @@ typedef struct s_vars
 	char		**map_array;
 	t_map		map;
 	t_img		background;
-	t_img		player;
+	t_player	player;
 	t_img		collectible;
 	t_img		exit;
 	t_img		wall;

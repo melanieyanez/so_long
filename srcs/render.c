@@ -6,27 +6,34 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 10:18:39 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/16 12:18:51 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/16 22:31:36 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
+void	draw_wall(t_vars *vars)
+{
+	
+	
+}
+
+
 void	img_loading(t_vars *vars)
 {
-	vars->background.img = mlx_png_file_to_image(vars->mlx, "imgs/background.png", &vars->background.line_length, &vars->background.endian);
-	vars->wall.img = mlx_xpm_file_to_image(vars->mlx, "imgs/wall.xpm", &vars->wall.line_length, &vars->wall.endian);
-	vars->player.img = mlx_xpm_file_to_image(vars->mlx, "imgs/player.xpm", &vars->player.line_length, &vars->player.endian);
-	vars->collectible.img = mlx_xpm_file_to_image(vars->mlx, "imgs/collect.xpm", &vars->collectible.line_length, &vars->collectible.endian);
+	vars->background.img = mlx_png_file_to_image(vars->mlx, "imgs/background2.png", &vars->background.line_length, &vars->background.endian);
+	vars->wall.img = mlx_png_file_to_image(vars->mlx, "imgs/tree-variations2.png", &vars->wall.line_length, &vars->wall.endian);
+	vars->player.img.img = mlx_png_file_to_image(vars->mlx, "imgs/fox.png", &vars->player.img.line_length, &vars->player.img.endian);
+	vars->collectible.img = mlx_png_file_to_image(vars->mlx, "imgs/rasp.png", &vars->collectible.line_length, &vars->collectible.endian);
 	vars->exit.img = mlx_xpm_file_to_image(vars->mlx, "imgs/exit.xpm", &vars->exit.line_length, &vars->exit.endian);
-	if (vars->background.img == NULL || vars->wall.img == NULL || vars->player.img == NULL || vars->collectible.img == NULL || vars->exit.img == NULL)
+	if (vars->background.img == NULL || vars->wall.img == NULL || vars->player.img.img == NULL || vars->collectible.img == NULL || vars->exit.img == NULL)
 	{
 		printf("Error loading image\n");
 		exit (1);
 	}
 	vars->background.addr = mlx_get_data_addr(vars->background.img, &vars->background.bits_per_pixel, &vars->background.line_length, &vars->background.endian);
 	vars->wall.addr = mlx_get_data_addr(vars->wall.img, &vars->wall.bits_per_pixel, &vars->wall.line_length, &vars->wall.endian);
-	vars->player.addr = mlx_get_data_addr(vars->player.img, &vars->player.bits_per_pixel, &vars->player.line_length, &vars->player.endian);
+	vars->player.img.addr = mlx_get_data_addr(vars->player.img.img, &vars->player.img.bits_per_pixel, &vars->player.img.line_length, &vars->player.img.endian);
 	vars->collectible.addr = mlx_get_data_addr(vars->collectible.img, &vars->collectible.bits_per_pixel, &vars->collectible.line_length, &vars->collectible.endian);
 	vars->exit.addr = mlx_get_data_addr(vars->exit.img, &vars->exit.bits_per_pixel, &vars->exit.line_length, &vars->exit.endian);
 }
@@ -54,7 +61,11 @@ void	drawing_updated(t_vars *vars)
 			}
 			else if (vars->map_array[i][j] == 'P')
 			{
-				mlx_put_image_to_window(vars->mlx, vars->wdw, vars->player.img, j * SIZE, i * SIZE);
+				vars->player.pos_x = j;
+				vars->player.pos_y = i;
+				printf("pos x %d\n", vars->player.pos_x);
+				mlx_put_image_to_window(vars->mlx, vars->wdw, vars->background.img, j * SIZE, i * SIZE);
+				mlx_put_image_to_window(vars->mlx, vars->wdw, vars->player.img.img, j * SIZE, i * SIZE);
 			}
 			else if (vars->map_array[i][j] == 'C')
 			{

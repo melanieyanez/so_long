@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 10:18:31 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/15 17:29:51 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/16 22:33:07 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	key_actions(int key, t_vars *vars)
 	}
 	else if (key == KEY_RIGHT)
 	{
+		vars->player.pos_x += SIZE;
+		printf("pos x %d\n", vars->player.pos_x);
 		vars->square.start_x += 10;
 	}
 	else if (key == KEY_UP)
@@ -54,8 +56,8 @@ int	key_actions(int key, t_vars *vars)
 		vars->square.start_y += 10;
 	}
 	mlx_clear_window(vars->mlx, vars->wdw);
-	draw_background(vars);
-	drawing(vars);
+	//draw_background(vars);
+	drawing_updated(vars);
 	mlx_put_image_to_window(vars->mlx, vars->wdw, vars->img.img, 0, 0);
 	return (0);
 }
