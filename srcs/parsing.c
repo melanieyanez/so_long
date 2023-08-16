@@ -6,12 +6,13 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:52:45 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/15 18:14:06 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/16 10:11:40 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
+/*
 void	line_interpreter(char *line)
 {
 	int	i;
@@ -19,10 +20,18 @@ void	line_interpreter(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] == '0')
-			return ;
+		draw_background();
+		if (line[i] == '1')
+			draw_wall();
+		else if (line[i] == 'C')
+			draw_collectible();
+		else if (line[i] == 'P')
+			draw_player();
+		else if (line[i] == 'E')
+			draw_exit();
 	}
 }
+*/
 
 void	map_parser(t_vars *vars)
 {
@@ -40,10 +49,9 @@ void	map_parser(t_vars *vars)
 	line = get_next_line(fd);
 	while (line)
 	{
+		vars->map_array[vars->map.map_y] = ft_strdup(line);
 		vars->map.map_y++;
 		vars->map.map_x = ft_strlen(line);
-		drawing_updated(vars, line);
-		//line_interpreter(line);
 		line = get_next_line(fd);
 	}
 	close(fd);

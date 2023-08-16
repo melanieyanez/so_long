@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 00:19:58 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/15 18:23:10 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/16 11:10:15 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 # define WIDTH 1280
 # define HEIGHT 720
+# define SIZE 50
 
 # define KEY_LEFT   123
 # define KEY_RIGHT  124
@@ -76,10 +77,13 @@ typedef struct s_vars
 {
 	void		*mlx;
 	void		*wdw;
-	int			tile_size_x;
-	int			tile_size_y;
+	char		**map_array;
 	t_map		map;
 	t_img		background;
+	t_img		player;
+	t_img		collectible;
+	t_img		exit;
+	t_img		wall;
 	t_img		test;
 	t_img		img;
 	t_square	square;
@@ -88,6 +92,8 @@ typedef struct s_vars
 /*_____________ Functions _______________________*/
 
 //checker.c
+
+void	map_error(void);
 
 //events.c
 
@@ -98,6 +104,7 @@ int		key_actions(int key, t_vars *vars);
 //initialization.c
 
 void	initialization(t_vars *vars, char *file_path);
+void	map_size(t_vars *vars);
 
 //parsing.c
 
@@ -109,6 +116,6 @@ void	map_parser(t_vars *vars);
 void	draw_background(t_vars *vars);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void	drawing(t_vars *vars);
-void	drawing_updated(t_vars *vars, char *line);
+void	drawing_updated(t_vars *vars);
 
 #endif

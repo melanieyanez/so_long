@@ -6,7 +6,11 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 18:00:37 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/11 18:00:38 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/16 10:09:30 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+void	map_error(void)
+{
+	return ;
+}
