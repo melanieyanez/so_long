@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 00:19:58 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/16 22:24:18 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/19 17:39:06 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct s_map
 	char	*path;
 	int		map_x;
 	int		map_y;
+	int		res_x;
+	int		res_y;
 }t_map;
 
 typedef struct s_img
@@ -63,6 +65,7 @@ typedef struct s_player
 	int		pos_x;
 	int		pos_y;
 	t_img	img;
+	t_img	img_rev;
 }t_player;
 
 typedef struct utils
@@ -92,6 +95,9 @@ typedef struct s_vars
 	t_img		test;
 	t_img		img;
 	t_square	square;
+	int			rev;
+	int			collected;
+	int			moves;
 }t_vars;
 
 /*_____________ Functions _______________________*/
@@ -122,5 +128,7 @@ void	draw_background(t_vars *vars);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void	drawing(t_vars *vars);
 void	drawing_updated(t_vars *vars);
+int		render(t_vars *vars);
+void	img_loading(t_vars *vars);
 
 #endif
