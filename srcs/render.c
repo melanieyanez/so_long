@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 10:18:39 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/19 17:41:48 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/20 12:12:26 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,13 @@ void	draw_player(t_vars *vars, int i, int j)
 	}
 	mlx_put_image_to_window(vars->mlx, vars->wdw, vars->background.img, j * SIZE, i * SIZE);
 	if (vars->rev == 0)
+	{
 		mlx_put_image_to_window(vars->mlx, vars->wdw, vars->player.img.img, vars->player.pos_x, vars->player.pos_y);
+	}
 	if (vars->rev == 1)
+	{
 		mlx_put_image_to_window(vars->mlx, vars->wdw, vars->player.img_rev.img, vars->player.pos_x, vars->player.pos_y);
+	}
 }
 
 void	img_loading(t_vars *vars)
@@ -52,10 +56,10 @@ void	drawing_updated(t_vars *vars)
 	int	j;
 
 	i = 0;
-	while (vars->map_array[i])
+	while (i < vars->map.map_y)
 	{
 		j = 0;
-		while (vars->map_array[i][j])
+		while (j < vars->map.map_x)
 		{
 			if (vars->map_array[i][j] == '0')
 			{
@@ -63,22 +67,44 @@ void	drawing_updated(t_vars *vars)
 			}
 			if (vars->map_array[i][j] == '1')
 			{
-				mlx_put_image_to_window(vars->mlx, vars->wdw, vars->background.img, j * SIZE, i * SIZE);
+				//mlx_put_image_to_window(vars->mlx, vars->wdw, vars->background.img, j * SIZE, i * SIZE);
 				mlx_put_image_to_window(vars->mlx, vars->wdw, vars->wall.img, j * SIZE, i * SIZE);
 			}
 			if (vars->map_array[i][j] == 'C')
 			{
-				mlx_put_image_to_window(vars->mlx, vars->wdw, vars->background.img, j * SIZE, i * SIZE);
+				//mlx_put_image_to_window(vars->mlx, vars->wdw, vars->background.img, j * SIZE, i * SIZE);
 				mlx_put_image_to_window(vars->mlx, vars->wdw, vars->collectible.img, j * SIZE, i * SIZE);
 			}
 			if (vars->map_array[i][j] == 'E')
 			{
-				mlx_put_image_to_window(vars->mlx, vars->wdw, vars->background.img, j * SIZE, i * SIZE);
+				//mlx_put_image_to_window(vars->mlx, vars->wdw, vars->background.img, j * SIZE, i * SIZE);
 				mlx_put_image_to_window(vars->mlx, vars->wdw, vars->exit.img, j * SIZE, i * SIZE);
 			}
 			if (vars->map_array[i][j] == 'P')
 			{
 				draw_player(vars, i, j);
+			}
+			j ++;
+		}
+		i ++;
+	}
+}
+
+void	draw_wall(t_vars *vars)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < vars->map.map_y)
+	{
+		j = 0;
+		while (j < vars->map.map_x)
+		{
+			if (vars->map_array[i][j] == '1')
+			{
+				//mlx_put_image_to_window(vars->mlx, vars->wdw, vars->background.img, j * SIZE, i * SIZE);
+				mlx_put_image_to_window(vars->mlx, vars->wdw, vars->wall.img, j * SIZE, i * SIZE);
 			}
 			j ++;
 		}
@@ -92,12 +118,12 @@ void	draw_background(t_vars *vars)
 	int	j;
 
 	i = 0;
-	while (i < vars->map.map_x)
+	while (i < vars->map.map_y)
 	{
 		j = 0;
-		while (j < vars->map.map_y)
+		while (j < vars->map.map_x)
 		{
-			mlx_put_image_to_window(vars->mlx, vars->wdw, vars->background.img, i * SIZE, j * SIZE);
+			mlx_put_image_to_window(vars->mlx, vars->wdw, vars->background.img, j * SIZE, i * SIZE);
 			j ++;
 		}
 		i ++;
@@ -109,15 +135,14 @@ void	game_data(t_vars *vars)
 	mlx_put_image_to_window(vars->mlx, vars->wdw, vars->collectible.img,  vars->map.map_x - 20, vars->map.map_y * SIZE + 10);
 	mlx_string_put(vars->mlx, vars->wdw, vars->map.map_x + 25, vars->map.map_y * SIZE + 30, 0xFF0000, "collected :");
 	mlx_string_put(vars->mlx, vars->wdw, vars->map.map_x + 140, vars->map.map_y * SIZE + 30, 0xFF0000, ft_itoa(vars->collected));
-	printf("collected : %d\n", vars->collected);
 }
 
 int	render(t_vars *vars)
 {
 	//draw_background(vars); // doit dessiner le background partout
+	//draw_wall(vars);
 	drawing_updated(vars);
-	game_data(vars);
-	//draw_objects(vars); // doit dessiner les C, les W, et l'exit
 	//draw_player(vars); // doit dessiner le player en fct de pos.x et pos.y
+	game_data(vars);
 	return (0);
 }

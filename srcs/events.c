@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 10:18:31 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/19 17:39:36 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/20 11:39:21 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,34 +20,28 @@ int	close_window(t_vars *vars)
 	return (0);
 }
 
-int	mouse_actions(int key, t_vars *vars)
-{
-	if (key == 6)
-		printf("Hello!\n");
-	else if (key == 7)
-		printf("Goodbye!\n");
-	return (0);
-}
-
 void	player_pos(t_vars *vars, int pot_x, int pot_y)
 {
-	printf("x %d y %d\n", vars->player.pos_x, vars->player.pos_y);
-	printf("pot x %d pot y %d\n", pot_x, pot_y);
 	if (pot_x <= vars->map.res_x - SIZE && pot_x >= 0 && pot_y <= vars->map.res_y - SIZE && pot_y >= 0)
 	{
-		if (vars->map_array[(pot_y) / SIZE][(pot_x) / SIZE] == '0')
+		vars->moves ++;
+		if (vars->map_array[(pot_y) / SIZE][(pot_x) / SIZE] == '0' || vars->map_array[(pot_y) / SIZE][(pot_x) / SIZE] == 'P')
 		{
 			vars->player.pos_x = pot_x;
 			vars->player.pos_y = pot_y;
 		}
-		if (vars->map_array[(pot_y) / SIZE][(pot_x) / SIZE] == 'C')
+		else if (vars->map_array[(pot_y) / SIZE][(pot_x) / SIZE] == 'C')
 		{
 			vars->collected ++;
 			vars->map_array[(pot_y) / SIZE][(pot_x) / SIZE] = '0';
 			vars->player.pos_x = pot_x;
 			vars->player.pos_y = pot_y;
 		}
-		printf("x %d y %d\n", vars->player.pos_x, vars->player.pos_y);	
+		else if (vars->map_array[(pot_y) / SIZE][(pot_x) / SIZE] == 'E')
+		{
+			vars->player.pos_x = pot_x;
+			vars->player.pos_y = pot_y;
+		}
 	}
 }
 

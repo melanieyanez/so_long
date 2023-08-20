@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 00:19:58 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/19 17:39:06 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/20 12:02:16 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,5 +130,6 @@ void	drawing(t_vars *vars);
 void	drawing_updated(t_vars *vars);
 int		render(t_vars *vars);
 void	img_loading(t_vars *vars);
+void	draw_wall(t_vars *vars);
 
 #endif
