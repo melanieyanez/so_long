@@ -6,16 +6,9 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 17:52:36 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/20 15:22:33 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/20 20:14:39 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/* gcc -Lmlx -lmlx -framework OpenGL -framework AppKit main.c -o so_long */
-
-/* utiliser la première fonction pr la taille, pr connaitre les coordonnées du player */
-/* utiliser une fct différente pr dessiner le background partout */
-/* utiliser une fct différente pr dessiner le player */
-/* utiliser une fct qui gère l'interaction du player avec les objets */
 
 #include "../includes/so_long.h"
 

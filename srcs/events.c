@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 10:18:31 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/20 13:38:07 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/20 20:17:43 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,30 +57,19 @@ int	key_actions(int key, t_vars *vars)
 	{
 		vars->rev = 1;
 		player_pos(vars, vars->player.pos_x - SIZE, vars->player.pos_y);
-		//if ((vars->player.pos_x - SIZE) >= 0)
-		//	vars->player.pos_x -= SIZE;
 	}
 	else if (key == KEY_RIGHT)
 	{
 		vars->rev = 0;
 		player_pos(vars, vars->player.pos_x + SIZE, vars->player.pos_y);
-		//if ((vars->player.pos_x / SIZE) < vars->map.map_x - 1)
-		//	vars->player.pos_x += SIZE;
 	}
 	else if (key == KEY_UP)
 	{
 		player_pos(vars, vars->player.pos_x, vars->player.pos_y - SIZE);
-		//if ((vars->player.pos_y - SIZE) >= 0)
-		//{
-		//	if ((vars->player.pos_y >= SIZE) && (vars->map_array[vars->player.pos_x / SIZE][vars->player.pos_y - SIZE / SIZE - 1] != '1'))
-		//		vars->player.pos_y -= SIZE;
-		//}
 	}
 	else if (key == KEY_DOWN)
 	{
 		player_pos(vars, vars->player.pos_x, vars->player.pos_y + SIZE);
-		//if ((vars->player.pos_y / SIZE) < vars->map.map_y - 1)
-		//	vars->player.pos_y += SIZE;
 	}
 	return (0);
 }

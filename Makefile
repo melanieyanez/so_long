@@ -6,7 +6,7 @@
 #    By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/09 23:57:00 by melanieyane       #+#    #+#              #
-#    Updated: 2023/08/10 00:34:38 by melanieyane      ###   ########.fr        #
+#    Updated: 2023/08/20 19:18:59 by melanieyane      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,15 +45,13 @@ ${OBJDIR}%.o : ${SRCDIR}%.c
 ${NAME} : ${OBJS}
 	make -C mlx
 	make -C libft
-	@${CP} mlx/libmlx.dylib .
-	@${GCC} ${OBJS} -Llibft -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -o ${NAME}
+	@${GCC} ${OBJS} -Llibft -lft -Lmlx -lmlx -lz -framework OpenGL -framework AppKit -o ${NAME}
 			
 all : ${NAME}
 
 # Nettoyage
 
 clean : 
-	@${RM} libmlx.dylib
 	@${RM} ${OBJS}
 	make clean -C mlx
 	make clean -C libft
