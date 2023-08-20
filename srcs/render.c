@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 10:18:39 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/20 12:12:26 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/20 13:13:38 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,17 +67,17 @@ void	drawing_updated(t_vars *vars)
 			}
 			if (vars->map_array[i][j] == '1')
 			{
-				//mlx_put_image_to_window(vars->mlx, vars->wdw, vars->background.img, j * SIZE, i * SIZE);
+				mlx_put_image_to_window(vars->mlx, vars->wdw, vars->background.img, j * SIZE, i * SIZE);
 				mlx_put_image_to_window(vars->mlx, vars->wdw, vars->wall.img, j * SIZE, i * SIZE);
 			}
 			if (vars->map_array[i][j] == 'C')
 			{
-				//mlx_put_image_to_window(vars->mlx, vars->wdw, vars->background.img, j * SIZE, i * SIZE);
+				mlx_put_image_to_window(vars->mlx, vars->wdw, vars->background.img, j * SIZE, i * SIZE);
 				mlx_put_image_to_window(vars->mlx, vars->wdw, vars->collectible.img, j * SIZE, i * SIZE);
 			}
 			if (vars->map_array[i][j] == 'E')
 			{
-				//mlx_put_image_to_window(vars->mlx, vars->wdw, vars->background.img, j * SIZE, i * SIZE);
+				mlx_put_image_to_window(vars->mlx, vars->wdw, vars->background.img, j * SIZE, i * SIZE);
 				mlx_put_image_to_window(vars->mlx, vars->wdw, vars->exit.img, j * SIZE, i * SIZE);
 			}
 			if (vars->map_array[i][j] == 'P')
