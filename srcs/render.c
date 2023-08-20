@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 10:18:39 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/20 13:13:38 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/20 16:07:59 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	draw_player(t_vars *vars, int i, int j)
 		vars->player.pos_x = j * SIZE;
 		vars->player.pos_y = i * SIZE;
 	}
-	mlx_put_image_to_window(vars->mlx, vars->wdw, vars->background.img, j * SIZE, i * SIZE);
+	//mlx_put_image_to_window(vars->mlx, vars->wdw, vars->background.img, j * SIZE, i * SIZE);
 	if (vars->rev == 0)
 	{
 		mlx_put_image_to_window(vars->mlx, vars->wdw, vars->player.img.img, vars->player.pos_x, vars->player.pos_y);
@@ -61,26 +61,32 @@ void	drawing_updated(t_vars *vars)
 		j = 0;
 		while (j < vars->map.map_x)
 		{
-			if (vars->map_array[i][j] == '0')
+			if (vars->map_array[i][j] != '0' && vars->map_array[i][j] != '1' && vars->map_array[i][j] != 'C' && vars->map_array[i][j] != 'E' && vars->map_array[i][j] != 'P')
 			{
-				mlx_put_image_to_window(vars->mlx, vars->wdw, vars->background.img, j * SIZE, i * SIZE);
+				ft_printf("Error!\nUnknown character encountered.\n");
+				exit(1);
 			}
+			mlx_put_image_to_window(vars->mlx, vars->wdw, vars->background.img, j * SIZE, i * SIZE);
+			//if (vars->map_array[i][j] == '0')
+			//{
+			//	mlx_put_image_to_window(vars->mlx, vars->wdw, vars->background.img, j * SIZE, i * SIZE);
+			//}
 			if (vars->map_array[i][j] == '1')
 			{
-				mlx_put_image_to_window(vars->mlx, vars->wdw, vars->background.img, j * SIZE, i * SIZE);
+				//mlx_put_image_to_window(vars->mlx, vars->wdw, vars->background.img, j * SIZE, i * SIZE);
 				mlx_put_image_to_window(vars->mlx, vars->wdw, vars->wall.img, j * SIZE, i * SIZE);
 			}
 			if (vars->map_array[i][j] == 'C')
 			{
-				mlx_put_image_to_window(vars->mlx, vars->wdw, vars->background.img, j * SIZE, i * SIZE);
+				//mlx_put_image_to_window(vars->mlx, vars->wdw, vars->background.img, j * SIZE, i * SIZE);
 				mlx_put_image_to_window(vars->mlx, vars->wdw, vars->collectible.img, j * SIZE, i * SIZE);
 			}
-			if (vars->map_array[i][j] == 'E')
+			else if (vars->map_array[i][j] == 'E')
 			{
-				mlx_put_image_to_window(vars->mlx, vars->wdw, vars->background.img, j * SIZE, i * SIZE);
+				//mlx_put_image_to_window(vars->mlx, vars->wdw, vars->background.img, j * SIZE, i * SIZE);
 				mlx_put_image_to_window(vars->mlx, vars->wdw, vars->exit.img, j * SIZE, i * SIZE);
 			}
-			if (vars->map_array[i][j] == 'P')
+			else if (vars->map_array[i][j] == 'P')
 			{
 				draw_player(vars, i, j);
 			}
@@ -130,18 +136,28 @@ void	draw_background(t_vars *vars)
 	}
 }
 
+// ajouter une condition de taille minimum pour afficher
+
 void	game_data(t_vars *vars)
 {
-	mlx_put_image_to_window(vars->mlx, vars->wdw, vars->collectible.img,  vars->map.map_x - 20, vars->map.map_y * SIZE + 10);
-	mlx_string_put(vars->mlx, vars->wdw, vars->map.map_x + 25, vars->map.map_y * SIZE + 30, 0xFF0000, "collected :");
-	mlx_string_put(vars->mlx, vars->wdw, vars->map.map_x + 140, vars->map.map_y * SIZE + 30, 0xFF0000, ft_itoa(vars->collected));
+	mlx_put_image_to_window(vars->mlx, vars->wdw, vars->collectible.img, 10, vars->map.res_y + 10);
+	mlx_string_put(vars->mlx, vars->wdw, 60, vars->map.res_y + 30, WHITE, "collected:");
+	mlx_string_put(vars->mlx, vars->wdw, 170, vars->map.res_y + 30, WHITE, ft_itoa(vars->collected));
+	mlx_string_put(vars->mlx, vars->wdw, vars->map.res_x - 220, vars->map.res_y + 30, WHITE, "number of moves:");
+	mlx_string_put(vars->mlx, vars->wdw, vars->map.res_x - 50, vars->map.res_y + 30, WHITE, ft_itoa(vars->moves));
+	if (vars->collected == vars->to_collect)
+	{
+		mlx_string_put(vars->mlx, vars->wdw, vars->map.res_x / 2 - 150, vars->map.res_y + 30, WHITE, "You got all the fruits, go for the exit!");
+	}
 }
 
 int	render(t_vars *vars)
 {
+	mlx_clear_window(vars->mlx, vars->wdw);
 	//draw_background(vars); // doit dessiner le background partout
 	//draw_wall(vars);
 	drawing_updated(vars);
+	//mlx_clear_window(vars->mlx, vars->wdw);
 	//draw_player(vars); // doit dessiner le player en fct de pos.x et pos.y
 	game_data(vars);
 	return (0);

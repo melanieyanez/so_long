@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:52:45 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/16 10:11:40 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/20 16:06:00 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,45 @@ void	line_interpreter(char *line)
 }
 */
 
-void	map_parser(t_vars *vars)
+void	map_counter(t_vars *vars, char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == 'P')
+			vars->start_found ++;
+		else if (line[i] == 'E')
+			vars->exit_found ++;
+		else if (line[i] == 'C')
+			vars->to_collect ++;
+		i ++;
+	}
+}
+
+// ajouter le reste des erreurs
+
+void	map_parser(t_vars *vars) // devrait etre le array filler
 {
 	int		fd;
 	char	*line;
+	int		i;
 
+	i = 0;
 	fd = open(vars->map.path, O_RDONLY);
-	if (fd < 0)
-	{
-		ft_printf("Error opening map\n");
-		exit (1);
-	}
-	vars->map.map_x = 0;
-	vars->map.map_y = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
-		vars->map_array[vars->map.map_y] = ft_strdup(line);
-		vars->map.map_y++;
-		vars->map.map_x = ft_strlen(line);
+		map_counter(vars, line);
+		vars->map_array[i] = ft_strdup(line);
+		i++;
 		line = get_next_line(fd);
 	}
 	close(fd);
+	if (vars->start_found > 1 || vars->exit_found > 1)
+	{
+		ft_printf("Error!\nMultiple start or exit found.\n");
+		exit (1);
+	}
 }

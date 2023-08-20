@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 00:19:58 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/20 12:02:16 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/20 15:58:23 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define GREEN 	0x00008000
 # define YELLOW 0x00FFFACD
 # define PINK 	0x00FF69B4
+# define WHITE	0xFFFFFF
 
 /*_____________ Structures _______________________*/
 
@@ -98,6 +99,12 @@ typedef struct s_vars
 	int			rev;
 	int			collected;
 	int			moves;
+	int			to_collect;
+	int			exit_unlocked;
+	int			won;
+	int			fd;
+	int			start_found;
+	int			exit_found;
 }t_vars;
 
 /*_____________ Functions _______________________*/
@@ -116,6 +123,7 @@ int		key_actions(int key, t_vars *vars);
 
 void	initialization(t_vars *vars, char *file_path);
 void	map_size(t_vars *vars);
+int		linelen(char *str);
 
 //parsing.c
 

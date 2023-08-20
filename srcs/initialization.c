@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 18:00:40 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/19 17:39:17 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/20 16:04:06 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,23 @@ void	initialization(t_vars *vars, char *file)
 	vars->rev = 0;
 	vars->collected = 0;
 	vars->moves = 0;
+	vars->to_collect = 0;
+	vars->exit_unlocked = 0;
+	vars->won = 0;
+	vars->exit_found = 0;
+	vars->start_found = 0;
 }
 
-void	map_size(t_vars *vars)
+int	linelen(char *str)
+{
+	int	size;
+
+	while (str[size] && str[size] != '\n')
+		size++;
+	return (size);
+}
+
+void	map_size(t_vars *vars) //devrait etre le map parser
 {
 	int		fd;
 	char	*line;
@@ -34,7 +48,7 @@ void	map_size(t_vars *vars)
 	fd = open(vars->map.path, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_printf("Error opening map\n");
+		ft_printf("Error!\nError opening map.\n");
 		exit (1);
 	}
 	vars->map.map_x = 0;
@@ -43,7 +57,13 @@ void	map_size(t_vars *vars)
 	while (line)
 	{
 		vars->map.map_y++;
-		vars->map.map_x = ft_strlen(line);
+		if (vars->map.map_y == 1)
+			vars->map.map_x = linelen(line);
+		if (linelen(line) != vars->map.map_x)
+		{
+			ft_printf("Error!\nThe map is not rectangular.\n");
+			exit(1);
+		}
 		line = get_next_line(fd);
 	}
 	close(fd);

@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 10:18:31 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/20 11:39:21 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/20 13:38:07 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	player_pos(t_vars *vars, int pot_x, int pot_y)
 
 int	key_actions(int key, t_vars *vars)
 {
-	vars->moves ++;
 	if (key == KEY_ESCAPE)
 	{
 		mlx_destroy_window(vars->mlx, vars->wdw);
