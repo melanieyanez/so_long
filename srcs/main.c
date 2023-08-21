@@ -6,9 +6,15 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 17:52:36 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/20 20:55:33 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/21 21:21:20 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/* Réduire les lignes trop longues */
+/* Ajouter la condition while (!won) */
+/* Affichage de la victoire dans le shell ? */
+/* Ajouter animation victoire */
+/* Free array et line */
 
 #include "../includes/so_long.h"
 
@@ -17,10 +23,9 @@ int	main(int argc, char **argv)
 	t_vars	vars;
 
 	if (argc != 2)
-	{	ft_printf("Error!\nPlease enter only one map path.\n");
-		exit (1);
-	}
+		map_error("Please enter only one map path.\n");
 	initialization(&vars, argv[1]);
+	extension_checker(&vars);
 	map_parser(&vars);
 	vars.mlx = mlx_init();
 	vars.wdw = mlx_new_window(vars.mlx, vars.map.map_x * SIZE, vars.map.map_y * SIZE + SIZE, "Forest Quest");

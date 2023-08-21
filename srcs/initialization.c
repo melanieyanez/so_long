@@ -6,9 +6,14 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 18:00:40 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/20 16:04:06 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/21 21:19:55 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/* Faire la fonction initialization plus propre */
+/* Modifier le nom de la fonction map size en map parser */
+/* et la passer dans le fichier parsing.c */
+/* Ajouter la condition while (!won) */
 
 #include <../includes/so_long.h>
 
@@ -29,6 +34,7 @@ void	initialization(t_vars *vars, char *file)
 	vars->won = 0;
 	vars->exit_found = 0;
 	vars->start_found = 0;
+	vars->pos_exit = 0;
 }
 
 int	linelen(char *str)
@@ -40,17 +46,14 @@ int	linelen(char *str)
 	return (size);
 }
 
-void	map_size(t_vars *vars) //devrait etre le map parser
+void	map_size(t_vars *vars)
 {
 	int		fd;
 	char	*line;
 
 	fd = open(vars->map.path, O_RDONLY);
 	if (fd < 0)
-	{
-		ft_printf("Error!\nError opening map.\n");
-		exit (1);
-	}
+		map_error("Error opening map.\n");
 	vars->map.map_x = 0;
 	vars->map.map_y = 0;
 	line = get_next_line(fd);
@@ -60,11 +63,10 @@ void	map_size(t_vars *vars) //devrait etre le map parser
 		if (vars->map.map_y == 1)
 			vars->map.map_x = linelen(line);
 		if (linelen(line) != vars->map.map_x)
-		{
-			ft_printf("Error!\nThe map is not rectangular.\n");
-			exit(1);
-		}
+			map_error("The map is not rectangular.\n");
 		line = get_next_line(fd);
 	}
+	if (vars->map.map_x == 0)
+		map_error("The map is empty.\n");
 	close(fd);
 }

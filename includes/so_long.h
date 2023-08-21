@@ -6,9 +6,11 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 00:19:58 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/20 15:58:23 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/21 21:12:48 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/* Passer toutes les variables dans utils et modifier le code en accord */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
@@ -19,8 +21,6 @@
 # include "../mlx/mlx.h"
 # include "../libft/includes/libft.h"
 
-# define WIDTH 1280
-# define HEIGHT 720
 # define SIZE 50
 
 # define KEY_LEFT   123
@@ -30,11 +30,6 @@
 # define KEY_ESCAPE 53
 # define CLOSE		17
 
-# define RED 	0x00FF0000
-# define PURPLE 0x00800080
-# define GREEN 	0x00008000
-# define YELLOW 0x00FFFACD
-# define PINK 	0x00FF69B4
 # define WHITE	0xFFFFFF
 
 /*_____________ Structures _______________________*/
@@ -55,10 +50,6 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	int		sheet_x;
-	int		sheet_y;
-	int		sheet_width;
-	int		sheet_height;
 }t_img;
 
 typedef struct s_player
@@ -71,52 +62,54 @@ typedef struct s_player
 
 typedef struct utils
 {
-	int	collect_counter;
-	int	move_counter;
+	int			rev;
+	int			moves;
+	int			start_found;
+	int			to_collect;
+	int			collected;
+	int			exit_found;
+	int			exit_unlocked;
+	int			pos_exit;
+	int			won;
 }t_utils;
-
-typedef struct s_square
-{
-	int	start_x;
-	int	start_y;
-	int	size;
-}t_square;
 
 typedef struct s_vars
 {
 	void		*mlx;
 	void		*wdw;
-	char		**map_array;
+	t_img		img;
 	t_map		map;
+	char		**map_array;
 	t_img		background;
-	t_player	player;
+	t_img		wall;
 	t_img		collectible;
 	t_img		exit;
-	t_img		wall;
-	t_img		test;
-	t_img		img;
-	t_square	square;
+	t_player	player;
 	int			rev;
-	int			collected;
 	int			moves;
-	int			to_collect;
-	int			exit_unlocked;
-	int			won;
-	int			fd;
 	int			start_found;
+	int			to_collect;
+	int			collected;
 	int			exit_found;
+	int			exit_unlocked;
+	int			pos_exit;
+	int			won;
 }t_vars;
 
 /*_____________ Functions _______________________*/
 
 //checker.c
 
-void	map_error(void);
+void	map_error(char *error_message);
+void	map_checker(t_vars *vars);
+void	extension_checker(t_vars *vars);
+void	wall_checker(t_vars *vars);
+void	path_checker(t_vars *vars);
 
 //events.c
 
 int		close_window(t_vars *vars);
-int		mouse_actions(int key, t_vars *vars);
+void	player_pos(t_vars *vars, int pot_x, int pot_y);
 int		key_actions(int key, t_vars *vars);
 
 //initialization.c
@@ -127,17 +120,16 @@ int		linelen(char *str);
 
 //parsing.c
 
-void	line_interpreter(char *line);
 void	map_parser(t_vars *vars);
+void	map_counter(t_vars *vars, char *line);
 
 //render.c
 
 void	draw_background(t_vars *vars);
-void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
-void	drawing(t_vars *vars);
+void	draw_player(t_vars *vars);
 void	drawing_updated(t_vars *vars);
 int		render(t_vars *vars);
 void	img_loading(t_vars *vars);
-void	draw_wall(t_vars *vars);
+void	game_data(t_vars *vars);
 
 #endif

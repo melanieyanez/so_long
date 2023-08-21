@@ -6,32 +6,15 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:52:45 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/20 16:06:00 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/21 21:20:09 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/* Modifier le nom du map parser en array filler */
+/* et ajouter la fonction de initialization.c */
+/* Ajouter la condition while (!won) */
+
 #include "../includes/so_long.h"
-
-/*
-void	line_interpreter(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		draw_background();
-		if (line[i] == '1')
-			draw_wall();
-		else if (line[i] == 'C')
-			draw_collectible();
-		else if (line[i] == 'P')
-			draw_player();
-		else if (line[i] == 'E')
-			draw_exit();
-	}
-}
-*/
 
 void	map_counter(t_vars *vars, char *line)
 {
@@ -50,9 +33,7 @@ void	map_counter(t_vars *vars, char *line)
 	}
 }
 
-// ajouter le reste des erreurs
-
-void	map_parser(t_vars *vars) // devrait etre le array filler
+void	map_parser(t_vars *vars)
 {
 	int		fd;
 	char	*line;
@@ -69,9 +50,7 @@ void	map_parser(t_vars *vars) // devrait etre le array filler
 		line = get_next_line(fd);
 	}
 	close(fd);
-	if (vars->start_found > 1 || vars->exit_found > 1)
-	{
-		ft_printf("Error!\nMultiple start or exit found.\n");
-		exit (1);
-	}
+	map_checker(vars);
+	wall_checker(vars);
+	path_checker(vars);
 }
