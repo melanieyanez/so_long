@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 00:19:58 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/21 21:12:48 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/22 09:57:19 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct utils
 	int			exit_unlocked;
 	int			pos_exit;
 	int			won;
+	int			moving;
 }t_utils;
 
 typedef struct s_vars
@@ -94,9 +95,17 @@ typedef struct s_vars
 	int			exit_unlocked;
 	int			pos_exit;
 	int			won;
+	int			current_frame;
+	void		*sprite_images[7];
+	int			moving;
+	t_utils		utils;
 }t_vars;
 
 /*_____________ Functions _______________________*/
+
+//animation.c
+
+void	fox_sprite(t_vars *vars, char *foxtype, int num_frames);
 
 //checker.c
 
@@ -110,7 +119,8 @@ void	path_checker(t_vars *vars);
 
 int		close_window(t_vars *vars);
 void	player_pos(t_vars *vars, int pot_x, int pot_y);
-int		key_actions(int key, t_vars *vars);
+int		key_press_actions(int key, t_vars *vars);
+int		key_release_actions(int key, t_vars *vars);
 
 //initialization.c
 

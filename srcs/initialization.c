@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 18:00:40 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/21 21:19:55 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/22 09:59:00 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ void	initialization(t_vars *vars, char *file)
 	vars->exit_found = 0;
 	vars->start_found = 0;
 	vars->pos_exit = 0;
+	vars->current_frame = 0;
+	vars->moving = 0;
+	vars->utils.moving = 0;
 }
 
 int	linelen(char *str)

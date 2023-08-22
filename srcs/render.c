@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 10:18:39 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/21 21:22:10 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/22 09:52:34 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,25 @@
 
 void	draw_player(t_vars *vars)
 {
-	if (vars->rev == 0)
+	if (vars->utils.moving == 1 && vars->rev == 0 && vars->won == 0)
 	{
-		mlx_put_image_to_window(vars->mlx, vars->wdw, vars->player.img.img, vars->player.pos_x, vars->player.pos_y);
+		fox_sprite(vars, "imgs/moving_fox_", 8);
 	}
-	else if (vars->rev == 1)
+	else if (vars->utils.moving == 1 && vars->rev == 1 && vars->won == 0)
 	{
-		mlx_put_image_to_window(vars->mlx, vars->wdw, vars->player.img_rev.img, vars->player.pos_x, vars->player.pos_y);
+		fox_sprite(vars, "imgs/moving_rev_fox_", 8);
+	}
+	else if (vars->utils.moving == 0 && vars->rev == 0 && vars->won == 0)
+	{
+		fox_sprite(vars, "imgs/idle_fox_", 1);
+	}
+	else if (vars->utils.moving == 0 && vars->rev == 1 && vars->won == 0)
+	{
+		fox_sprite(vars, "imgs/idle_rev_fox_", 1);
+	}
+	else if (vars->won == 1)
+	{
+		fox_sprite(vars, "imgs/sleepy_fox_", 1);
 	}
 }
 
@@ -34,8 +46,8 @@ void	img_loading(t_vars *vars)
 {
 	vars->background.img = mlx_png_file_to_image(vars->mlx, "imgs/background.png", &vars->background.line_length, &vars->background.endian);
 	vars->wall.img = mlx_png_file_to_image(vars->mlx, "imgs/tree.png", &vars->wall.line_length, &vars->wall.endian);
-	vars->player.img.img = mlx_png_file_to_image(vars->mlx, "imgs/fox.png", &vars->player.img.line_length, &vars->player.img.endian);
-	vars->player.img_rev.img = mlx_png_file_to_image(vars->mlx, "imgs/fox_rev.png", &vars->player.img_rev.line_length, &vars->player.img_rev.endian);
+	vars->player.img.img = mlx_png_file_to_image(vars->mlx, "imgs/moving_fox_0.png", &vars->player.img.line_length, &vars->player.img.endian);
+	vars->player.img_rev.img = mlx_png_file_to_image(vars->mlx, "imgs/moving_fox_0.png", &vars->player.img_rev.line_length, &vars->player.img_rev.endian);
 	vars->collectible.img = mlx_png_file_to_image(vars->mlx, "imgs/rasp2.png", &vars->collectible.line_length, &vars->collectible.endian);
 	vars->exit.img = mlx_png_file_to_image(vars->mlx, "imgs/cave.png", &vars->exit.line_length, &vars->exit.endian);
 	if (vars->background.img == NULL || vars->wall.img == NULL || vars->player.img.img == NULL || vars->collectible.img == NULL || vars->exit.img == NULL)

@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 10:18:31 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/21 21:19:49 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/22 08:20:59 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,9 @@ void	player_pos(t_vars *vars, int pot_x, int pot_y)
 	}
 }
 
-int	key_actions(int key, t_vars *vars)
+int	key_press_actions(int key, t_vars *vars)
 {
+	vars->utils.moving = 1;
 	if (key == KEY_ESCAPE)
 	{
 		mlx_destroy_window(vars->mlx, vars->wdw);
@@ -81,5 +82,11 @@ int	key_actions(int key, t_vars *vars)
 	{
 		player_pos(vars, vars->player.pos_x, vars->player.pos_y + SIZE);
 	}
+	return (0);
+}
+
+int	key_release_actions(int key, t_vars *vars)
+{
+	vars->utils.moving = 0;
 	return (0);
 }

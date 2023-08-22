@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 17:52:36 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/21 21:21:20 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/22 08:21:17 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	main(int argc, char **argv)
 	vars.wdw = mlx_new_window(vars.mlx, vars.map.map_x * SIZE, vars.map.map_y * SIZE + SIZE, "Forest Quest");
 	vars.img.img = mlx_new_image(vars.mlx, vars.map.map_x * SIZE, vars.map.map_y * SIZE);
 	vars.img.addr = mlx_get_data_addr(vars.img.img, &vars.img.bits_per_pixel, &vars.img.line_length, &vars.img.endian);
-	mlx_hook(vars.wdw, 2, 0, key_actions, &vars);
+	mlx_hook(vars.wdw, 2, 0, key_press_actions, &vars);
+	mlx_hook(vars.wdw, 3, 0, key_release_actions, &vars);
 	mlx_hook(vars.wdw, 17, 0, close_window, &vars);
 	img_loading(&vars);
 	mlx_loop_hook(vars.mlx, render, &vars);
