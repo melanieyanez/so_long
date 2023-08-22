@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:52:45 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/22 14:06:10 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/22 23:41:26 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ void	map_counter(t_vars *vars, char *line)
 	int	i;
 
 	i = 0;
-	while (line[i])
+	while (line[i] != '\n')
 	{
-		if (line[i] == 'P')
+		if (line[i] != '0' && line[i] != '1' && line[i] != 'C'
+			&& line[i] != 'E' && line[i] != 'P')
+			map_error("Unknown character encountered.\n");
+		else if (line[i] == 'P')
 			vars->utils.start_found ++;
 		else if (line[i] == 'E')
 			vars->utils.exit_found ++;
@@ -48,7 +51,7 @@ void	array_filler(t_vars *vars)
 	close(fd);
 	map_checker(vars);
 	wall_checker(vars);
-	path_checker(vars);
+	//path_checker(vars);
 }
 
 void	map_parser(t_vars *vars)

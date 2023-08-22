@@ -6,12 +6,9 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 10:18:39 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/22 15:13:50 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/22 17:27:33 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/* Ajouter une condition de taille minimum pour game data */
-/* Ajuster pour que les phrases soient vraiment en plein milieu */
 
 #include "../includes/so_long.h"
 
@@ -47,10 +44,6 @@ void	draw_objects(t_vars *vars)
 		j = 0;
 		while (j < vars->map.map_x)
 		{
-			if (vars->map_array[i][j] != '0' && vars->map_array[i][j] != '1' && \
-				vars->map_array[i][j] != 'C' && vars->map_array[i][j] != 'E' && \
-				vars->map_array[i][j] != 'P')
-				map_error("Unknown character encountered.\n");
 			line_interpreter(vars, &i, &j);
 			j ++;
 		}
@@ -79,39 +72,46 @@ void	draw_background(t_vars *vars)
 
 void	game_data(t_vars *vars)
 {
-	mlx_put_image_to_window(vars->mlx, vars->wdw, \
-		vars->collectible.img, 10, vars->map.res_y + 10);
-	mlx_string_put(vars->mlx, vars->wdw, \
-		50, vars->map.res_y + 30, WHITE, "collected:");
-	mlx_string_put(vars->mlx, vars->wdw, 125, \
-		vars->map.res_y + 30, WHITE, ft_itoa(vars->utils.collected));
-	mlx_string_put(vars->mlx, vars->wdw, \
-		vars->map.res_x - 160, vars->map.res_y + 30, WHITE, "number of moves:");
-	mlx_string_put(vars->mlx, vars->wdw, vars->map.res_x - 40, \
-		vars->map.res_y + 30, WHITE, ft_itoa(vars->utils.moves));
+	if (vars->map.map_x >= 7)
+	{
+		mlx_put_image_to_window(vars->mlx, vars->wdw, \
+			vars->collectible.img, 10, vars->map.res_y + 10);
+		mlx_string_put(vars->mlx, vars->wdw, \
+			50, vars->map.res_y + 30, WHITE, "collected:");
+		mlx_string_put(vars->mlx, vars->wdw, 125, \
+			vars->map.res_y + 30, WHITE, ft_itoa(vars->utils.collected));
+		mlx_string_put(vars->mlx, vars->wdw, \
+			vars->map.res_x - 160, vars->map.res_y + 30, WHITE, \
+			"number of moves:");
+		mlx_string_put(vars->mlx, vars->wdw, vars->map.res_x - 40, \
+			vars->map.res_y + 30, WHITE, ft_itoa(vars->utils.moves));
+	}
 }
 
 void	game_sentences(t_vars *vars)
 {
-	if (vars->utils.collected < vars->utils.to_collect)
+	if (vars->map.map_x >= 13)
 	{
-		if (vars->utils.pos_exit)
-			mlx_string_put(vars->mlx, vars->wdw, vars->map.res_x / 2 - 150, \
-			vars->map.res_y + 30, WHITE, "Careful! There are still \
-				fruits to collect!");
-		else
-			mlx_string_put(vars->mlx, vars->wdw, vars->map.res_x / 2 - 150, \
-				vars->map.res_y + 30, WHITE, "Hurry! You need to grab \
-					all the fruits!");
-	}
-	if (vars->utils.collected == vars->utils.to_collect)
-	{
-		if (vars->utils.won)
-			mlx_string_put(vars->mlx, vars->wdw, vars->map.res_x / 2 - 150, \
-				vars->map.res_y + 30, WHITE, "Congratulations! You won!");
-		else
-			mlx_string_put(vars->mlx, vars->wdw, vars->map.res_x / 2 - 150, \
-				vars->map.res_y + 30, WHITE, "You got all the fruits,\
-					 time to go home!");
+		if (vars->utils.collected < vars->utils.to_collect)
+		{
+			if (vars->utils.pos_exit)
+				mlx_string_put(vars->mlx, vars->wdw, vars->map.res_x / 2 - 160, \
+				vars->map.res_y + 30, WHITE, "Careful! There are still \
+					fruits to collect!");
+			else
+				mlx_string_put(vars->mlx, vars->wdw, vars->map.res_x / 2 - 140, \
+					vars->map.res_y + 30, WHITE, "Hurry! You need to grab \
+						all the fruits!");
+		}
+		if (vars->utils.collected == vars->utils.to_collect)
+		{
+			if (vars->utils.won)
+				mlx_string_put(vars->mlx, vars->wdw, vars->map.res_x / 2 - 90, \
+					vars->map.res_y + 30, WHITE, "Congratulations! You won!");
+			else
+				mlx_string_put(vars->mlx, vars->wdw, vars->map.res_x / 2 - 150, \
+					vars->map.res_y + 30, WHITE, "You got all the fruits,\
+						time to go home!");
+		}
 	}
 }

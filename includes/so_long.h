@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 00:19:58 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/22 15:03:33 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/22 23:49:40 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,10 @@ typedef struct utils
 	int			start_found;
 	int			to_collect;
 	int			collected;
+	int			collect_access;
 	int			exit_found;
 	int			exit_unlocked;
+	int			exit_access;
 	int			pos_exit;
 	int			won;
 	int			moving;
@@ -103,7 +105,7 @@ void	map_error(char *error_message);
 void	map_checker(t_vars *vars);
 void	extension_checker(t_vars *vars);
 void	wall_checker(t_vars *vars);
-void	path_checker(t_vars *vars);
+//void	path_checker(t_vars *vars);
 
 //events.c
 

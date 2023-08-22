@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 18:00:40 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/22 14:47:30 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/22 23:50:13 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	initialization(t_vars *vars, char *file)
 {
 	vars->map.path = ft_strdup(file);
+	extension_checker(vars);
 	map_parser(vars);
 	vars->map.res_x = vars->map.map_x * SIZE;
 	vars->map.res_y = vars->map.map_y * SIZE;
@@ -32,6 +33,8 @@ void	initialization(t_vars *vars, char *file)
 	vars->utils.pos_exit = 0;
 	vars->player.current_frame = 0;
 	vars->utils.moving = 0;
+	vars->utils.exit_access = 0;
+	vars->utils.collect_access = 0;
 }
 
 void	img_loading(t_vars *vars)
