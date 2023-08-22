@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 17:52:36 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/22 08:21:17 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/22 11:31:49 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ int	main(int argc, char **argv)
 	img_loading(&vars);
 	mlx_loop_hook(vars.mlx, render, &vars);
 	mlx_loop(vars.mlx);
+	//mlx_destroy_image(vars.mlx, vars.player.img.img);
+	//vars.player.img.img = NULL; 
+	//mlx_destroy_image(vars.mlx, vars.player.img_rev.img);
+	//vars.player.img_rev.img = NULL; 
 	mlx_destroy_image(vars.mlx, vars.img.img);
 	return (0);
 }

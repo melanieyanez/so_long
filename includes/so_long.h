@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 00:19:58 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/22 09:57:19 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/22 11:59:35 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,11 @@ typedef struct s_player
 {
 	int		pos_x;
 	int		pos_y;
+	int		current_frame;
+	void	*sprite_frames[7];
 	t_img	img;
 	t_img	img_rev;
+	t_img	img_end;
 }t_player;
 
 typedef struct utils
@@ -95,8 +98,6 @@ typedef struct s_vars
 	int			exit_unlocked;
 	int			pos_exit;
 	int			won;
-	int			current_frame;
-	void		*sprite_images[7];
 	int			moving;
 	t_utils		utils;
 }t_vars;
