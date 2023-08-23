@@ -6,12 +6,9 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 18:00:37 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/22 23:54:15 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/23 17:08:55 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/* Créer la fonction path checker */
-/* Ajouter si la tile a déjà été visitée mais comment ? */
 
 #include "../includes/so_long.h"
 
@@ -59,22 +56,23 @@ void	wall_checker(t_vars *vars)
 	}
 }
 
-/*
 void	path_checker(t_vars *vars, int x, int y)
 {
-	if (vars->map_array[x][y] == '1' || x < 0 || y < 0
-		|| x >= vars->map.map_x || y >= vars->map.map_y)
+	if (x < 0 || y < 0
+		|| y > vars->map.map_x - 1 || x > vars->map.map_y - 1)
 		return ;
+	if (vars->map_array[x][y] == '1' || vars->visited[x][y] == 1)
+		return ;
+	vars->visited[x][y] = 1;
 	if (vars->map_array[x][y] == 'C')
 		vars->utils.collect_access ++;
 	else if (vars->map_array[x][y] == 'E')
-		vars->utils.exit_access = 1;
+		vars->utils.exit_access ++;
 	path_checker(vars, x - 1, y);
 	path_checker(vars, x + 1, y);
 	path_checker(vars, x, y - 1);
 	path_checker(vars, x, y + 1);
 }
-*/
 
 void	extension_checker(t_vars *vars)
 {

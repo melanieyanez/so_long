@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 18:00:40 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/22 23:50:13 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/23 16:33:36 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ void	initialization(t_vars *vars, char *file)
 	vars->utils.moving = 0;
 	vars->utils.exit_access = 0;
 	vars->utils.collect_access = 0;
+	vars->player.start_pos_x = 0;
+	vars->player.start_pos_y = 0;
+	init_visited(vars);
 }
 
 void	img_loading(t_vars *vars)
@@ -88,4 +91,46 @@ void	img_addr(t_vars *vars)
 	vars->exit.addr = mlx_get_data_addr(vars->exit.img, \
 		&vars->exit.bits_per_pixel, &vars->exit.line_length, \
 		&vars->exit.endian);
+}
+
+void	get_player_pos(t_vars *vars)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < vars->map.map_y)
+	{
+		j = 0;
+		while (j < vars->map.map_x)
+		{
+			if (vars->map_array[i][j] == 'P')
+			{
+				vars->player.start_pos_x = j;
+				vars->player.start_pos_y = i;
+			}
+			j ++;
+		}
+		i ++;
+	}
+}
+
+void	init_visited(t_vars *vars)
+{
+	int	i;
+	int	j;
+
+	vars->visited = malloc(sizeof(int *) * vars->map.map_y);
+	i = 0;
+	while (i < vars->map.map_y)
+	{
+		vars->visited[i] = malloc(sizeof(int) * vars->map.map_x);
+		j = 0;
+		while (j < vars->map.map_x)
+		{
+			vars->visited[i][j] = 0;
+			j++;
+		}
+		i++;
+	}
 }

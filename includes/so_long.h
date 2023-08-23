@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 00:19:58 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/22 23:49:40 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/23 13:50:11 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct s_img
 
 typedef struct s_player
 {
+	int		start_pos_x;
+	int		start_pos_y;
 	int		pos_x;
 	int		pos_y;
 	int		current_frame;
@@ -90,6 +92,7 @@ typedef struct s_vars
 	t_img		exit;
 	t_player	player;
 	t_utils		utils;
+	int			**visited;
 }t_vars;
 
 /*_____________ Functions _______________________*/
@@ -105,7 +108,7 @@ void	map_error(char *error_message);
 void	map_checker(t_vars *vars);
 void	extension_checker(t_vars *vars);
 void	wall_checker(t_vars *vars);
-//void	path_checker(t_vars *vars);
+void	path_checker(t_vars *vars, int x, int y);
 
 //events.c
 
@@ -124,6 +127,8 @@ void	free_array(t_vars *vars);
 void	initialization(t_vars *vars, char *file_path);
 void	img_loading(t_vars *vars);
 void	img_addr(t_vars *vars);
+void	get_player_pos(t_vars *vars);
+void	init_visited(t_vars *vars);
 
 //main.c
 

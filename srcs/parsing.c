@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:52:45 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/22 23:41:26 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/23 17:08:11 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,11 @@ void	array_filler(t_vars *vars)
 	close(fd);
 	map_checker(vars);
 	wall_checker(vars);
-	//path_checker(vars);
+	get_player_pos(vars);
+	path_checker(vars, vars->player.start_pos_y, vars->player.start_pos_x);
+	if (vars->utils.exit_access == 0
+		|| vars->utils.collect_access != vars->utils.to_collect)
+		map_error("No valid path.\n");
 }
 
 void	map_parser(t_vars *vars)
