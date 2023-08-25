@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 00:19:58 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/23 13:50:11 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/25 18:40:08 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	fox_sprite(t_vars *vars, char *foxtype, int num_frames);
 
 //checker.c
 
-void	map_error(char *error_message);
+void	map_error(t_vars *vars, char *error_message);
 void	map_checker(t_vars *vars);
 void	extension_checker(t_vars *vars);
 void	wall_checker(t_vars *vars);

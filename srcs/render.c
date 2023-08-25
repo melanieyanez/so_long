@@ -6,11 +6,14 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 10:18:39 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/23 11:01:42 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/25 17:53:22 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+/*----------------------------------------------*/
+/* Interpret map characters and draw corresponding images on the screen. */
 
 void	line_interpreter(t_vars *vars, int *i, int *j)
 {
@@ -33,6 +36,8 @@ void	line_interpreter(t_vars *vars, int *i, int *j)
 	}
 }
 
+/*----------------------------------------------*/
+
 void	draw_objects(t_vars *vars)
 {
 	int	i;
@@ -50,6 +55,8 @@ void	draw_objects(t_vars *vars)
 		i ++;
 	}
 }
+
+/*----------------------------------------------*/
 
 void	draw_background(t_vars *vars)
 {
@@ -70,8 +77,16 @@ void	draw_background(t_vars *vars)
 	}
 }
 
+/*----------------------------------------------*/
+/* Display in-game data and messages related to gameplay. */
+
 void	game_data(t_vars *vars)
 {
+	char	*collected;
+	char	*moves;
+
+	collected = ft_itoa(vars->utils.collected);
+	moves = ft_itoa(vars->utils.moves);
 	if (vars->map.map_x >= 7)
 	{
 		mlx_put_image_to_window(vars->mlx, vars->wdw, \
@@ -79,14 +94,18 @@ void	game_data(t_vars *vars)
 		mlx_string_put(vars->mlx, vars->wdw, \
 			50, vars->map.res_y + 30, WHITE, "collected:");
 		mlx_string_put(vars->mlx, vars->wdw, 125, \
-			vars->map.res_y + 30, WHITE, ft_itoa(vars->utils.collected));
+			vars->map.res_y + 30, WHITE, collected);
 		mlx_string_put(vars->mlx, vars->wdw, \
 			vars->map.res_x - 160, vars->map.res_y + 30, WHITE, \
 			"number of moves:");
 		mlx_string_put(vars->mlx, vars->wdw, vars->map.res_x - 40, \
-			vars->map.res_y + 30, WHITE, ft_itoa(vars->utils.moves));
+			vars->map.res_y + 30, WHITE, moves);
 	}
+	free(collected);
+	free(moves);
 }
+
+/*----------------------------------------------*/
 
 void	game_sentences(t_vars *vars)
 {

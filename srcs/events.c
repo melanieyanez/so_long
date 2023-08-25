@@ -6,20 +6,14 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 10:18:31 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/22 15:13:02 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/25 17:29:13 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-int	close_window(t_vars *vars)
-{
-	mlx_destroy_window(vars->mlx, vars->wdw);
-	if (vars->utils.won == 0)
-		ft_printf("\nYou successfully fleed from the dungeon.\n");
-	exit(0);
-	return (0);
-}
+/*----------------------------------------------*/
+/* Handles the player's movement and interactions with objects. */
 
 void	player_pos(t_vars *vars, int pot_x, int pot_y)
 {
@@ -40,6 +34,8 @@ void	player_pos(t_vars *vars, int pot_x, int pot_y)
 		player_pos_ext(vars, &pot_x, &pot_y);
 	}
 }
+
+/*----------------------------------------------*/
 
 void	player_pos_ext(t_vars *vars, int *pot_x, int *pot_y)
 {
@@ -64,6 +60,21 @@ void	player_pos_ext(t_vars *vars, int *pot_x, int *pot_y)
 		vars->player.pos_y = *pot_y;
 	}
 }
+
+/*----------------------------------------------*/
+/*  Respond to key presses and releases 
+	to control player movement and exit the game. */
+
+int	close_window(t_vars *vars)
+{
+	mlx_destroy_window(vars->mlx, vars->wdw);
+	if (vars->utils.won == 0)
+		ft_printf("\nYou successfully fleed from the dungeon.\n");
+	exit(0);
+	return (0);
+}
+
+/*----------------------------------------------*/
 
 int	key_press_actions(int key, t_vars *vars)
 {
@@ -91,6 +102,8 @@ int	key_press_actions(int key, t_vars *vars)
 		player_pos(vars, vars->player.pos_x, vars->player.pos_y + SIZE);
 	return (0);
 }
+
+/*----------------------------------------------*/
 
 int	key_release_actions(int key, t_vars *vars)
 {

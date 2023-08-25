@@ -6,11 +6,14 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 17:52:36 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/23 11:17:07 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/25 18:51:20 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+/*----------------------------------------------*/
+/* The main rendering function that redraws the game scene. */
 
 int	render(t_vars *vars)
 {
@@ -26,12 +29,14 @@ int	render(t_vars *vars)
 	return (0);
 }
 
+/*----------------------------------------------*/
+
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
 
 	if (argc != 2)
-		map_error("Please enter only one map path.\n");
+		map_error(&vars, "Please enter only one map path.\n");
 	initialization(&vars, argv[1]);
 	array_filler(&vars);
 	vars.mlx = mlx_init();
@@ -48,6 +53,5 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(vars.mlx, render, &vars);
 	mlx_loop(vars.mlx);
 	free_array(&vars);
-	mlx_destroy_image(vars.mlx, vars.img.img);
 	return (0);
 }

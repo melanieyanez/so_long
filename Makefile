@@ -6,7 +6,7 @@
 #    By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/09 23:57:00 by melanieyane       #+#    #+#              #
-#    Updated: 2023/08/20 19:18:59 by melanieyane      ###   ########.fr        #
+#    Updated: 2023/08/25 19:25:54 by melanieyane      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,12 +40,12 @@ RM = rm -Rf
 # Règles
 
 ${OBJDIR}%.o : ${SRCDIR}%.c
-	@${GCC} -Imlx -I ${HEADERS} -c $< -o $@
+	${GCC} -Imlx -I ${HEADERS} -c $< -o $@
 
 ${NAME} : ${OBJS}
 	make -C mlx
 	make -C libft
-	@${GCC} ${OBJS} -Llibft -lft -Lmlx -lmlx -lz -framework OpenGL -framework AppKit -o ${NAME}
+	${GCC} ${OBJS} -Llibft -lft -Lmlx -lmlx -lz -framework OpenGL -framework AppKit -o ${NAME}
 			
 all : ${NAME}
 
