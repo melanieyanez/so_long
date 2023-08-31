@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 18:00:37 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/25 19:38:19 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/31 19:55:15 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ void	map_error(t_vars *vars, char *error_message)
 {
 	ft_printf("Error!\n");
 	ft_printf("%s", error_message);
-	if (vars->map_array && vars->visited)
-		free_array(vars);
-	exit (1);
+	exit(1);
 }
 
 /*----------------------------------------------*/

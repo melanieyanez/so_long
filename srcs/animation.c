@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 06:49:45 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/25 18:41:47 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/31 20:00:57 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,10 @@ void	fox_sprite(t_vars *vars, char *foxtype, int num_frames)
 	{
 		str_i = ft_itoa(i);
 		filename = ft_strjoin(foxtype, str_i);
-		final_filename = ft_strjoin(filename, ".png");
-		vars->player.sprite_frames[i] = mlx_png_file_to_image(vars->mlx, \
-			final_filename, &vars->background.line_length, &vars->background.endian);
+		final_filename = ft_strjoin(filename, ".xpm");
+		vars->player.sprite_frames[i] = mlx_xpm_file_to_image(vars->mlx, \
+			final_filename, &vars->background.line_length, \
+			&vars->background.endian);
 		if (vars->player.sprite_frames[i] == NULL)
 			map_error(vars, "Image couldn't be loaded.\n");
 		free(str_i);

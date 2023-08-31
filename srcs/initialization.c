@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 18:00:40 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/25 18:42:13 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/31 20:35:51 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,23 +69,23 @@ void	init_visited(t_vars *vars)
 
 void	img_loading(t_vars *vars)
 {
-	vars->background.img = mlx_png_file_to_image(vars->mlx, \
-		"imgs/background.png", &vars->background.line_length, \
+	vars->background.img = mlx_xpm_file_to_image(vars->mlx, \
+		"imgs/background.xpm", &vars->background.line_length, \
 		&vars->background.endian);
-	vars->wall.img = mlx_png_file_to_image(vars->mlx, "imgs/tree.png", \
+	vars->wall.img = mlx_xpm_file_to_image(vars->mlx, "imgs/tree.xpm", \
 		&vars->wall.line_length, &vars->wall.endian);
-	vars->player.img.img = mlx_png_file_to_image(vars->mlx, \
-		"imgs/idle_fox_0.png", &vars->player.img.line_length, \
+	vars->player.img.img = mlx_xpm_file_to_image(vars->mlx, \
+		"imgs/idle_fox_0.xpm", &vars->player.img.line_length, \
 		&vars->player.img.endian);
-	vars->player.img_rev.img = mlx_png_file_to_image(vars->mlx, \
-		"imgs/idle_rev_fox_0.png", &vars->player.img_rev.line_length, \
+	vars->player.img_rev.img = mlx_xpm_file_to_image(vars->mlx, \
+		"imgs/idle_rev_fox_0.xpm", &vars->player.img_rev.line_length, \
 		&vars->player.img_rev.endian);
-	vars->player.img_end.img = mlx_png_file_to_image(vars->mlx, \
-		"imgs/sleepy_fox_0.png", &vars->player.img_end.line_length, \
+	vars->player.img_end.img = mlx_xpm_file_to_image(vars->mlx, \
+		"imgs/sleepy_fox_0.xpm", &vars->player.img_end.line_length, \
 		&vars->player.img_end.endian);
-	vars->collectible.img = mlx_png_file_to_image(vars->mlx, "imgs/rasp2.png", \
+	vars->collectible.img = mlx_xpm_file_to_image(vars->mlx, "imgs/rasp2.xpm", \
 		&vars->collectible.line_length, &vars->collectible.endian);
-	vars->exit.img = mlx_png_file_to_image(vars->mlx, "imgs/cave.png", \
+	vars->exit.img = mlx_xpm_file_to_image(vars->mlx, "imgs/cave.xpm", \
 		&vars->exit.line_length, &vars->exit.endian);
 	if (vars->background.img == NULL || vars->wall.img == NULL
 		|| vars->player.img.img == NULL || vars->player.img_rev.img == NULL

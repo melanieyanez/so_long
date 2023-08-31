@@ -6,11 +6,9 @@
 #    By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/09 23:57:00 by melanieyane       #+#    #+#              #
-#    Updated: 2023/08/25 19:25:54 by melanieyane      ###   ########.fr        #
+#    Updated: 2023/08/31 20:38:53 by melanieyane      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-# Attention d'ajouter les flags dans la compilation quand terminé
 
 NAME = so_long
 
@@ -34,31 +32,36 @@ CFLAGS = -Wall -Wextra -Werror
 
 # Commandes
 
-CP = cp
 RM = rm -Rf
 
 # Règles
 
 ${OBJDIR}%.o : ${SRCDIR}%.c
-	${GCC} -Imlx -I ${HEADERS} -c $< -o $@
+	@${GCC} -Imlx -I ${HEADERS} -c $< -o $@
 
 ${NAME} : ${OBJS}
-	make -C mlx
-	make -C libft
-	${GCC} ${OBJS} -Llibft -lft -Lmlx -lmlx -lz -framework OpenGL -framework AppKit -o ${NAME}
+	@echo "Compiling the mlx..."
+	@make -C mlx > /dev/null 2>&1;
+	@echo "Compiling the libft..."
+	@make -C libft
+	@echo "Compiling so_long..."
+	@${GCC} ${OBJS} -Llibft -lft -Lmlx -lmlx -lz -framework OpenGL -framework AppKit -o ${NAME}
+	@echo "All done!"
 			
 all : ${NAME}
 
 # Nettoyage
 
 clean : 
+	@echo "Cleaning..."
 	@${RM} ${OBJS}
-	make clean -C mlx
-	make clean -C libft
+	@make clean -C mlx
+	@make clean -C libft
 
 fclean : clean
+	@echo "Full cleaning..."
 	@${RM} ${NAME}
-	make fclean -C libft
+	@make fclean -C libft
 
 # Autres règles
 

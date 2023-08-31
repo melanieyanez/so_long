@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:52:45 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/25 18:42:47 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/08/26 09:55:55 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,11 @@ void	array_filler(t_vars *vars)
 		map_counter(vars, line);
 		vars->map_array[i] = ft_strdup(line);
 		i++;
+		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
+	free(line);
 	map_checker(vars);
 	wall_checker(vars);
 	get_player_pos(vars);
@@ -62,8 +64,10 @@ void	map_parser(t_vars *vars)
 			vars->map.map_x = linelen(line);
 		if (linelen(line) != vars->map.map_x)
 			map_error(vars, "The map is not rectangular.\n");
+		free(line);
 		line = get_next_line(fd);
 	}
+	free(line);
 	if (vars->map.map_x == 0)
 		map_error(vars, "The map is empty.\n");
 	close(fd);
