@@ -37,6 +37,7 @@ RM = rm -Rf
 # Règles
 
 ${OBJDIR}%.o : ${SRCDIR}%.c
+	@mkdir -p ${OBJDIR}
 	@${GCC} -Imlx -I ${HEADERS} -c $< -o $@
 
 ${NAME} : ${OBJS}
