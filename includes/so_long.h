@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 00:19:58 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/31 20:36:00 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/09/01 14:44:11 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ typedef struct s_vars
 {
 	void		*mlx;
 	void		*wdw;
-	t_img		img;
 	t_map		map;
 	char		**map_array;
 	t_img		background;
