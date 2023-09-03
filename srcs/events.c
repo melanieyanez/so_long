@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 10:18:31 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/25 17:29:13 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/09/03 14:52:40 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void	player_pos(t_vars *vars, int pot_x, int pot_y)
 		&& pot_y <= vars->map.res_y - SIZE && pot_y >= 0)
 	{
 		vars->utils.moves ++;
-		vars->utils.pos_exit = 0;
 		if (vars->map_array[(vars->\
 			player.pos_y) / SIZE][(vars->player.pos_x) / SIZE] == 'E')
 			vars->utils.pos_exit = 1;
 		if (vars->map_array[(pot_y) / SIZE][(pot_x) / SIZE] == '0'
 			|| vars->map_array[(pot_y) / SIZE][(pot_x) / SIZE] == 'P')
 		{
+			vars->utils.pos_exit = 0;
 			vars->player.pos_x = pot_x;
 			vars->player.pos_y = pot_y;
 		}
@@ -41,6 +41,7 @@ void	player_pos_ext(t_vars *vars, int *pot_x, int *pot_y)
 {
 	if (vars->map_array[(*pot_y) / SIZE][(*pot_x) / SIZE] == 'C')
 	{
+		vars->utils.pos_exit = 0;
 		vars->utils.collected ++;
 		if (vars->utils.collected == vars->utils.to_collect)
 			vars->utils.exit_unlocked = 1;

@@ -6,7 +6,7 @@
 /*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 10:18:39 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/25 17:53:22 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/09/03 14:59:41 by melanieyane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void	game_sentences(t_vars *vars)
 			else
 				mlx_string_put(vars->mlx, vars->wdw, vars->map.res_x / 2 - 150, \
 					vars->map.res_y + 30, WHITE, "You got all the fruits,\
-						time to go home!");
+						 time to go home!");
 		}
 	}
 }
