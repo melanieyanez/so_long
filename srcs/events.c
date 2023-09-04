@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
+/*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 10:18:31 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/09/03 14:52:40 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/09/04 14:57:50 by myanez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ int	key_press_actions(int key, t_vars *vars)
 		player_pos(vars, vars->player.pos_x, vars->player.pos_y - SIZE);
 	else if (key == KEY_DOWN && vars->utils.won == 0)
 		player_pos(vars, vars->player.pos_x, vars->player.pos_y + SIZE);
+	else
+		vars->utils.moving = 0;
 	return (0);
 }
 
@@ -108,6 +110,7 @@ int	key_press_actions(int key, t_vars *vars)
 
 int	key_release_actions(int key, t_vars *vars)
 {
+	(void)key;
 	vars->utils.moving = 0;
 	return (0);
 }

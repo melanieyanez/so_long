@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
+/*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 18:00:40 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/31 20:35:51 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/09/04 14:50:23 by myanez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@
 void	initialization(t_vars *vars, char *file)
 {
 	vars->map.path = ft_strdup(file);
-	extension_checker(vars);
 	map_parser(vars);
 	vars->map.res_x = vars->map.map_x * SIZE;
 	vars->map.res_y = vars->map.map_y * SIZE;
 	vars->map_array = malloc(sizeof(char *) * vars->map.map_y);
+	if (!vars->map_array)
+		return ;
 	vars->player.pos_x = -1;
 	vars->player.pos_y = -1;
 	vars->utils.rev = 0;
@@ -49,10 +50,14 @@ void	init_visited(t_vars *vars)
 	int	j;
 
 	vars->visited = malloc(sizeof(int *) * vars->map.map_y);
+	if (!vars->visited)
+		return ;
 	i = 0;
 	while (i < vars->map.map_y)
 	{
 		vars->visited[i] = malloc(sizeof(int) * vars->map.map_x);
+		if (!vars->visited[i])
+			return ;
 		j = 0;
 		while (j < vars->map.map_x)
 		{
@@ -91,7 +96,7 @@ void	img_loading(t_vars *vars)
 		|| vars->player.img.img == NULL || vars->player.img_rev.img == NULL
 		|| vars->player.img_end.img == NULL || vars->collectible.img == NULL
 		|| vars->exit.img == NULL)
-		map_error(vars, "Image couldn't be loaded.\n");
+		map_error("Image couldn't be loaded.\n");
 	img_addr(vars);
 }
 

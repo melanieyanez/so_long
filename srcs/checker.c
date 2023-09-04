@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
+/*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 18:00:37 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/31 19:55:15 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/09/04 13:54:39 by myanez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*----------------------------------------------*/
 /* Prints error messages and exits the program. */
 
-void	map_error(t_vars *vars, char *error_message)
+void	map_error(char *error_message)
 {
 	ft_printf("Error!\n");
 	ft_printf("%s", error_message);
@@ -28,15 +28,15 @@ void	map_error(t_vars *vars, char *error_message)
 void	map_checker(t_vars *vars)
 {
 	if (vars->utils.start_found > 1)
-		map_error(vars, "Multiple starts found.\n");
+		map_error("Multiple starts found.\n");
 	else if (vars->utils.start_found < 1)
-		map_error(vars, "No start position found.\n");
+		map_error("No start position found.\n");
 	else if (vars->utils.exit_found > 1)
-		map_error(vars, "Multiple exits found.\n");
+		map_error("Multiple exits found.\n");
 	else if (vars->utils.exit_found < 1)
-		map_error(vars, "No exit found.\n");
+		map_error("No exit found.\n");
 	else if (vars->utils.to_collect < 1)
-		map_error(vars, "No collectible found.\n");
+		map_error("No collectible found.\n");
 }
 
 /*----------------------------------------------*/
@@ -53,14 +53,14 @@ void	wall_checker(t_vars *vars)
 	{
 		if (vars->map_array[0][i] != '1' ||
 			vars->map_array[vars->map.map_y - 1][i] != '1')
-			map_error(vars, "Map not enclosed into walls.\n");
+			map_error("Map not enclosed into walls.\n");
 		i ++;
 	}
 	while (j < vars->map.map_y)
 	{
 		if (vars->map_array[j][0] != '1' ||
 			vars->map_array[j][vars->map.map_x - 1] != '1')
-			map_error(vars, "Map not enclosed into walls.\n");
+			map_error("Map not enclosed into walls.\n");
 		j ++;
 	}
 }
@@ -98,5 +98,5 @@ void	extension_checker(t_vars *vars)
 	if (ft_strlen(vars->map.path) >= ft_strlen(extension)
 		&& ft_strncmp(vars->map.path + ft_strlen(vars->map.path) \
 		- ft_strlen(extension), extension, ft_strlen(extension)) != 0)
-		map_error(vars, "Invalid file extension.\n");
+		map_error("Invalid file extension.\n");
 }

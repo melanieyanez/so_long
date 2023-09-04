@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
+/*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 17:52:36 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/09/01 14:44:17 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/09/04 14:06:13 by myanez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 	t_vars	vars;
 
 	if (argc != 2)
-		map_error(&vars, "Please enter only one map path.\n");
+		map_error("Please enter only one map path.\n");
 	initialization(&vars, argv[1]);
 	array_filler(&vars);
 	vars.mlx = mlx_init();

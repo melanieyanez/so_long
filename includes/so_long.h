@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
+/*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 00:19:58 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/09/01 14:44:11 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/09/04 14:03:49 by myanez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	fox_sprite(t_vars *vars, char *foxtype, int num_frames);
 
 //checker.c
 
-void	map_error(t_vars *vars, char *error_message);
+void	map_error(char *error_message);
 void	map_checker(t_vars *vars);
 void	extension_checker(t_vars *vars);
 void	wall_checker(t_vars *vars);

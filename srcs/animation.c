@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
+/*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 06:49:45 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/31 20:00:57 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/09/04 14:11:51 by myanez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	fox_sprite(t_vars *vars, char *foxtype, int num_frames)
 			final_filename, &vars->background.line_length, \
 			&vars->background.endian);
 		if (vars->player.sprite_frames[i] == NULL)
-			map_error(vars, "Image couldn't be loaded.\n");
+			map_error("Image couldn't be loaded.\n");
 		free(str_i);
 		free(filename);
 		free(final_filename);

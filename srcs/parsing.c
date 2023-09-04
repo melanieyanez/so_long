@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+        */
+/*   By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:52:45 by melanieyane       #+#    #+#             */
-/*   Updated: 2023/08/26 09:55:55 by melanieyane      ###   ########.fr       */
+/*   Updated: 2023/09/04 14:50:45 by myanez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,12 @@ void	array_filler(t_vars *vars)
 	free(line);
 	map_checker(vars);
 	wall_checker(vars);
+	extension_checker(vars);
 	get_player_pos(vars);
 	path_checker(vars, vars->player.start_pos_y, vars->player.start_pos_x);
 	if (vars->utils.exit_access == 0
 		|| vars->utils.collect_access != vars->utils.to_collect)
-		map_error(vars, "No valid path.\n");
+		map_error("No valid path.\n");
 }
 
 /*----------------------------------------------*/
@@ -53,7 +54,7 @@ void	map_parser(t_vars *vars)
 
 	fd = open(vars->map.path, O_RDONLY);
 	if (fd < 0)
-		map_error(vars, "Error opening map.\n");
+		map_error("Error opening map.\n");
 	vars->map.map_x = 0;
 	vars->map.map_y = 0;
 	line = get_next_line(fd);
@@ -63,13 +64,13 @@ void	map_parser(t_vars *vars)
 		if (vars->map.map_y == 1)
 			vars->map.map_x = linelen(line);
 		if (linelen(line) != vars->map.map_x)
-			map_error(vars, "The map is not rectangular.\n");
+			map_error("The map is not rectangular.\n");
 		free(line);
 		line = get_next_line(fd);
 	}
 	free(line);
 	if (vars->map.map_x == 0)
-		map_error(vars, "The map is empty.\n");
+		map_error("The map is empty.\n");
 	close(fd);
 }
 
@@ -85,7 +86,7 @@ void	map_counter(t_vars *vars, char *line)
 	{
 		if (line[i] != '0' && line[i] != '1' && line[i] != 'C'
 			&& line[i] != 'E' && line[i] != 'P')
-			map_error(vars, "Unknown character encountered.\n");
+			map_error("Unknown character encountered.\n");
 		else if (line[i] == 'P')
 			vars->utils.start_found ++;
 		else if (line[i] == 'E')
@@ -102,6 +103,7 @@ int	linelen(char *str)
 {
 	int	size;
 
+	size = 0;
 	while (str[size] && str[size] != '\n')
 		size++;
 	return (size);

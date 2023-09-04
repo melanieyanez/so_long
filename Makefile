@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+         #
+#    By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/09 23:57:00 by melanieyane       #+#    #+#              #
-#    Updated: 2023/08/31 20:38:53 by melanieyane      ###   ########.fr        #
+#    Updated: 2023/09/04 14:07:05 by myanez-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ RM = rm -Rf
 
 ${OBJDIR}%.o : ${SRCDIR}%.c
 	@mkdir -p ${OBJDIR}
-	@${GCC} -Imlx -I ${HEADERS} -c $< -o $@
+	@${GCC} ${CFLAGS} -Imlx -I ${HEADERS} -c $< -o $@
 
 ${NAME} : ${OBJS}
 	@echo "Compiling the mlx..."
@@ -46,7 +46,7 @@ ${NAME} : ${OBJS}
 	@echo "Compiling the libft..."
 	@make -C libft
 	@echo "Compiling so_long..."
-	@${GCC} ${OBJS} -Llibft -lft -Lmlx -lmlx -lz -framework OpenGL -framework AppKit -o ${NAME}
+	@${GCC} ${CFLAGS} ${OBJS} -Llibft -lft -Lmlx -lmlx -lz -framework OpenGL -framework AppKit -o ${NAME}
 	@echo "All done!"
 			
 all : ${NAME}
