@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: myanez-p <myanez-p@student.42.fr>          +#+  +:+       +#+         #
+#    By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/09 23:57:00 by melanieyane       #+#    #+#              #
-#    Updated: 2023/09/04 14:07:05 by myanez-p         ###   ########.fr        #
+#    Updated: 2023/09/07 11:47:00 by melanieyane      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = so_long
 # Dossiers
 
 SRCDIR = SRCS
-OBJDIR = objs/
+OBJDIR = objs
 HDRDIR = includes
 
 
@@ -36,7 +36,7 @@ RM = rm -Rf
 
 # Règles
 
-${OBJDIR}%.o : ${SRCDIR}%.c
+${OBJDIR}/%.o : ${SRCDIR}/%.c
 	@mkdir -p ${OBJDIR}
 	@${GCC} ${CFLAGS} -Imlx -I ${HEADERS} -c $< -o $@
 
