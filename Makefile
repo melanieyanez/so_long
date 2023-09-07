@@ -6,7 +6,7 @@
 #    By: melanieyanez <melanieyanez@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/09 23:57:00 by melanieyane       #+#    #+#              #
-#    Updated: 2023/09/07 11:47:00 by melanieyane      ###   ########.fr        #
+#    Updated: 2023/09/07 12:46:17 by melanieyane      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,29 +38,30 @@ RM = rm -Rf
 
 ${OBJDIR}/%.o : ${SRCDIR}/%.c
 	@mkdir -p ${OBJDIR}
+	@echo "Compiling $< into ${@F}..."
 	@${GCC} ${CFLAGS} -Imlx -I ${HEADERS} -c $< -o $@
 
 ${NAME} : ${OBJS}
-	@echo "Compiling the mlx..."
+	@echo "\nCompiling the mlx library..."
 	@make -C mlx > /dev/null 2>&1;
-	@echo "Compiling the libft..."
+	@echo "\nCompiling the libft library..."
 	@make -C libft
-	@echo "Compiling so_long..."
+	@echo "\nCompiling so_long executable..."
 	@${GCC} ${CFLAGS} ${OBJS} -Llibft -lft -Lmlx -lmlx -lz -framework OpenGL -framework AppKit -o ${NAME}
-	@echo "All done!"
+	@echo "\nAll done!"
 			
 all : ${NAME}
 
 # Nettoyage
 
 clean : 
-	@echo "Cleaning..."
+	@echo "Cleaning...\n"
 	@${RM} ${OBJS}
 	@make clean -C mlx
 	@make clean -C libft
 
 fclean : clean
-	@echo "Full cleaning..."
+	@echo "Full cleaning...\n"
 	@${RM} ${NAME}
 	@make fclean -C libft
 
